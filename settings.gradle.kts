@@ -23,6 +23,8 @@ dependencyResolutionManagement {
 
   repositories {
     maven("https://maven.pkg.st/")
+    maven("https://storage.googleapis.com/r8-releases/raw")
+    google()
   }
   versionCatalogs {
     create("mn") {

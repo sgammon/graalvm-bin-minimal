@@ -1,0 +1,18 @@
+[versions]
+r8 = "8.1.56"
+graalvm = "23.1.0"
+
+[libraries]
+graalvm_svm = { group = "org.graalvm.nativeimage", name = "svm", version.ref = "graalvm" }
+graalvm_polyglot = { group = "org.graalvm.polyglot", name = "polyglot", version.ref = "graalvm" }
+graalvm_polyglot_js = { group = "org.graalvm.polyglot", name = "js", version.ref = "graalvm" }
+graalvm_js_language = { group = "org.graalvm.js", name = "js-language", version.ref = "graalvm" }
+graalvm_sdk = { group = "org.graalvm.sdk", name = "graal-sdk", version.ref = "graalvm" }
+r8 = { group = "com.android.tools", name = "r8", version.ref = "r8" }
+
+[bundles]
+
+graalvm = [
+    "graalvm_polyglot",
+    "graalvm_polyglot_js",
+]

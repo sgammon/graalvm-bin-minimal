@@ -1,0 +1,7 @@
+
+module sample {
+    requires java.base;
+    requires kotlin.stdlib;
+    requires info.picocli;
+    requires org.graalvm.polyglot;
+}

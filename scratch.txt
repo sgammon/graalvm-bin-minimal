@@ -1,0 +1,31 @@
+
+val appJar by tasks.registering(JavaExec::class) {
+  group = "build"
+  description = "Build a minified JAR, optimized for native images"
+
+  dependsOn(proguardJar)
+  val r8File = layout.buildDirectory.file("libs/elide-bin-minimal-dist.jar")
+  val rulesFile =  project.file("src/main/rules.pro")
+  val fatJarFile = proguardJar.get().outputs.files.singleFile
+
+  inputs.files(fatJarFile, rulesFile)
+  outputs.file(r8File)
+
+  classpath(r8)
+  mainClass = "com.android.tools.r8.R8"
+
+  args = listOf(
+    "--release",
+    "--classfile",
+    "--pg-compat",
+    "--no-tree-shaking",
+    "--no-minification",
+    "--no-desugaring",
+    "--output", r8File.get().asFile.toString(),
+    "--pg-conf", rulesFile.path,
+    "--lib", System.getProperty("java.home").toString(),
+    fatJarFile.get().toString(),
+  )
+}
+
+
